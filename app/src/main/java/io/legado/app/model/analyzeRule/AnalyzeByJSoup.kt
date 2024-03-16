@@ -380,7 +380,11 @@ class AnalyzeByJSoup(doc: Any) {
 
                 elements.removeAll(nullSet) //测试过，这样就行
                 */
-                for (pcInt in indexSet.toList().sortedDescending()) elements.removeAt(pcInt)
+                for (pcInt in indexSet.toList().sortedDescending()) {
+                    // https://github.com/jhy/jsoup/blob/jsoup-1.17.2/src/main/java/org/jsoup/select/Elements.java#L713
+                    // org.jsoup.select.Elements#remove(int index)
+                    elements.remove(pcInt)
+                }
             } else if (split == '.') { //选择
 
                 val es = Elements()
